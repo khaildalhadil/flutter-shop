@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopsmart/consts/validator.dart';
+import 'package:shopsmart/database/db_helper.dart';
 import 'package:shopsmart/screens/home_screen.dart';
 
 class Register extends StatefulWidget {
@@ -37,6 +37,8 @@ class _RegisterState extends State<Register> {
     super.initState();
   }
 
+  // final auth = FirebaseAuth.instance;
+
   Future<void> _registerFct() async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
@@ -46,8 +48,17 @@ class _RegisterState extends State<Register> {
         setState(() {
           isLoadding = true;
         });
+
+        // var user = await auth.createUserWithEmailAndPassword(
+        //   email: _emailController.text.trim(),
+        //   password: _passwordController.text.trim(),
+        // );
+
+        await DBHelper.insertUser(_emailController.text, _passwordController.text);
         Fluttertoast.showToast(
-          msg: "The Accounted has been added success",
+          msg:
+              // "The Accounted has been added success ${user.additionalUserInfo}",
+              "The Accounted has been added success ",
           textColor: Colors.white,
           fontSize: 16.0,
         );

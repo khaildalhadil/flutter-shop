@@ -10,8 +10,10 @@ import 'package:shopsmart/screens/auth/register.dart';
 import 'package:shopsmart/screens/home_screen.dart';
 import 'package:shopsmart/widgets/products/details.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
