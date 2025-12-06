@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopsmart/providers/UserProvider.dart';
 import 'package:shopsmart/providers/theme_provider.dart';
+import 'package:shopsmart/screens/auth/login.dart';
 import 'package:shopsmart/services/alert.dart';
 
 class ProfileScrren extends StatelessWidget {
@@ -9,6 +11,7 @@ class ProfileScrren extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvid = Provider.of<ThemeProvider>(context);
+    final userInfo = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white10,
@@ -130,11 +133,14 @@ class ProfileScrren extends StatelessWidget {
             ),
             ElevatedButton.icon(
               icon: Icon(Icons.login),
-              label: Text("Login"),
+
+              label: Text(userInfo == null ? "Logout": "Login"),
               onPressed: () async {
                 Alert.showErrorOrWarning(
                   context: context,
-                  fct: () {},
+                  fct: () {
+                    Navigator.pushNamed(context, Login.id);
+                  },
                   mst: "Are you sure you want to signout",
                   isError: false,
                 );

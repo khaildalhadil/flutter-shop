@@ -61,36 +61,38 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(height: 15.0),
           Text("Categories", style: TextStyle(fontWeight: FontWeight.bold)),
-          GridView.count(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 5,
-            children: [
-              CtgRoundedWidget(
-                image: "assets/images/bag/shopping_cart.png",
-                name: "name",
-              ),
-              CtgRoundedWidget(
-                image: "assets/images/bag/shopping_cart.png",
-                name: "name",
-              ),
-              CtgRoundedWidget(
-                image: "assets/images/bag/shopping_cart.png",
-                name: "name",
-              ),
-              CtgRoundedWidget(
-                image: "assets/images/bag/shopping_cart.png",
-                name: "name",
-              ),
-              CtgRoundedWidget(
-                image: "assets/images/bag/shopping_cart.png",
-                name: "name",
-              ),
-              CtgRoundedWidget(
-                image: "assets/images/bag/shopping_cart.png",
-                name: "name",
-              ),
-            ],
+          Flexible(
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: 5,
+              children: [
+                CtgRoundedWidget(
+                  image: "assets/images/bag/shopping_cart.png",
+                  name: "name",
+                ),
+                CtgRoundedWidget(
+                  image: "assets/images/bag/shopping_cart.png",
+                  name: "name",
+                ),
+                CtgRoundedWidget(
+                  image: "assets/images/bag/shopping_cart.png",
+                  name: "name",
+                ),
+                CtgRoundedWidget(
+                  image: "assets/images/bag/shopping_cart.png",
+                  name: "name",
+                ),
+                CtgRoundedWidget(
+                  image: "assets/images/bag/shopping_cart.png",
+                  name: "name",
+                ),
+                CtgRoundedWidget(
+                  image: "assets/images/bag/shopping_cart.png",
+                  name: "name",
+                ),
+              ],
+            ),
           ),
         ],
       ),

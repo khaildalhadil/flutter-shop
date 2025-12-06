@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopsmart/consts/validator.dart';
 import 'package:shopsmart/database/db_helper.dart';
+import 'package:shopsmart/providers/UserProvider.dart';
+import 'package:shopsmart/root_screen.dart';
+import 'package:shopsmart/screens/auth/login.dart';
 import 'package:shopsmart/screens/home_screen.dart';
 
 class Register extends StatefulWidget {
+  static const id = "/register";
   const Register({super.key});
 
   @override
@@ -12,6 +16,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
+
+
   late final TextEditingController _emailController;
   late final TextEditingController _userNameController;
   late final TextEditingController _passwordController;
@@ -62,6 +69,8 @@ class _RegisterState extends State<Register> {
           textColor: Colors.white,
           fontSize: 16.0,
         );
+        UserProvider().addUserInfo(_emailController.text, _userNameController.text, _passwordController.text);
+        Navigator.pushNamed(context, RootScreen.id);
       } catch (err) {
         Fluttertoast.showToast(
           msg: err.toString(),
@@ -117,7 +126,7 @@ class _RegisterState extends State<Register> {
                   controller: _userNameController,
                   focusNode: _userNameFocuse,
                   textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     hintText: "user123",
                     prefixIcon: Icon(Icons.person),
@@ -136,7 +145,7 @@ class _RegisterState extends State<Register> {
                   controller: _emailController,
                   focusNode: _emailFocuse,
                   textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: "Email address",
                     prefixIcon: Icon(Icons.email_outlined),
@@ -200,7 +209,7 @@ class _RegisterState extends State<Register> {
                           // validator: (value) {
                           //   return MyValidators.passwordValidator(value);
                           // },
-                          Navigator.pushNamed(context, "/login");
+                          Navigator.pushNamed(context, Login.id);
                         },
                         child: Text(
                           "Login",

@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopsmart/consts/validator.dart';
+import 'package:shopsmart/database/db_helper.dart';
+import 'package:shopsmart/providers/UserProvider.dart';
+import 'package:shopsmart/root_screen.dart';
+import 'package:shopsmart/screens/auth/register.dart';
+import 'package:shopsmart/screens/home_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
+  static const id = "/login";
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+
+
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
@@ -31,6 +40,40 @@ class _LoginState extends State<Login> {
   Future<void> _loginFct() async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      try {
+
+        final user = await DBHelper.getUser(_emailController.text, _passwordController.text);
+
+        if (user != null) {
+          Fluttertoast.showToast(
+            msg:
+            // "The Accounted has been added success ${user.additionalUserInfo}",
+            "Welcome Back ${user["email"]}",
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+
+          Navigator.pushNamed(context, RootScreen.id);
+
+        } else {
+          Fluttertoast.showToast(
+            msg:
+            // "The Accounted has been added success ${user.additionalUserInfo}",
+            "Wrong email or password!!! ",
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        }
+      } catch (err) {
+        Fluttertoast.showToast(
+          msg: err.toString(),
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    }
   }
 
   @override
@@ -72,8 +115,9 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   controller: _emailController,
                   focusNode: _emailFocuse,
+                  autofocus: true,
                   textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: "Email address",
                     prefixIcon: Icon(Icons.email_outlined),
@@ -116,7 +160,9 @@ class _LoginState extends State<Login> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _loginFct();
+                    },
                     icon: Icon(Icons.login, color: Colors.white, size: 22),
                     label: Text(
                       "Login",
@@ -131,7 +177,7 @@ class _LoginState extends State<Login> {
                       Text("Don't have an account? "),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/register");
+                          Navigator.pushNamed(context, Register.id);
                         },
                         child: Text(
                           "Register ",

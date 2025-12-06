@@ -8,6 +8,7 @@ import 'package:shopsmart/screens/search_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
+  static const id = "/root";
 
   @override
   State<RootScreen> createState() => _RootScreenState();

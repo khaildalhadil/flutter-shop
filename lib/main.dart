@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart/consts/theme_data.dart';
 import 'package:shopsmart/providers/ProductProvider.dart';
+import 'package:shopsmart/providers/UserProvider.dart';
 import 'package:shopsmart/providers/cart_provider.dart';
 import 'package:shopsmart/providers/theme_provider.dart';
 import 'package:shopsmart/root_screen.dart';
@@ -39,6 +40,11 @@ class MyApp extends StatelessWidget {
             return CartProvider();
           },
         ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return UserProvider();
+          },
+        ),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -49,10 +55,15 @@ class MyApp extends StatelessWidget {
               isDarkTheme: themeProvider.getIsDarkTheme,
               context: context,
             ),
-            // home: RootScreen(),
+            home: RootScreen(),
             // home: Login(),
-            home: Register(),
-            routes: {Details.id: (context) => Details()},
+            // home: Register(),
+            routes: {
+              RootScreen.id: (context)=> RootScreen(),
+              Details.id: (context) => Details(),
+              Register.id: (context) => Register(),
+              Login.id: (context) => Login(),
+            },
           );
         },
       ),
