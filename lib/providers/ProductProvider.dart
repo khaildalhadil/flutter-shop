@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shopsmart/database/db_helper.dart';
 import 'package:shopsmart/models/product.dart';
 import 'package:uuid/uuid.dart';
 
 class Productprovider with ChangeNotifier {
   List<ProductModel> get getProducts {
     return products;
+  }
+
+  Productprovider() {
+    addproductToDb();
+  }
+
+  Future<void> addproductToDb() async {
+    await DBHelper.insertProducts(products);
   }
 
   ProductModel? findByProductId(String id) {
@@ -435,3 +444,4 @@ class Productprovider with ChangeNotifier {
     ),
   ];
 }
+

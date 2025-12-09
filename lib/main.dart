@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart/consts/theme_data.dart';
+import 'package:shopsmart/database/db_helper.dart';
 import 'package:shopsmart/providers/ProductProvider.dart';
 import 'package:shopsmart/providers/UserProvider.dart';
 import 'package:shopsmart/providers/cart_provider.dart';
 import 'package:shopsmart/providers/theme_provider.dart';
 import 'package:shopsmart/root_screen.dart';
+import 'package:shopsmart/screens/Order.dart';
+import 'package:shopsmart/screens/Payment.dart';
+import 'package:shopsmart/screens/Rating.dart';
 import 'package:shopsmart/screens/auth/login.dart';
 import 'package:shopsmart/screens/auth/register.dart';
 import 'package:shopsmart/screens/home_screen.dart';
 import 'package:shopsmart/widgets/products/details.dart';
 
 void main() async {
+
   runApp(const MyApp());
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -40,11 +45,6 @@ class MyApp extends StatelessWidget {
             return CartProvider();
           },
         ),
-        ChangeNotifierProvider(
-          create: (_) {
-            return UserProvider();
-          },
-        ),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -63,6 +63,9 @@ class MyApp extends StatelessWidget {
               Details.id: (context) => Details(),
               Register.id: (context) => Register(),
               Login.id: (context) => Login(),
+              RatingWithButton.id: (context) => RatingWithButton(),
+              SimplePaymentWidget.id: (context) => SimplePaymentWidget(),
+              ThankYouScreen.id: (context) => ThankYouScreen()
             },
           );
         },

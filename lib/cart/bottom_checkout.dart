@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopsmart/cart/quantity_btn_sheet.dart';
 import 'package:shopsmart/providers/ProductProvider.dart';
 import 'package:shopsmart/providers/cart_provider.dart';
+import 'package:shopsmart/screens/Payment.dart';
 
 class BottomCheckout extends StatelessWidget {
   const BottomCheckout({super.key});
@@ -44,8 +45,10 @@ class BottomCheckout extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () => {},
-                child: Text("Check Out", style: TextStyle(color: Colors.white)),
+                onPressed: () => {
+                  Navigator.pushNamed(context, SimplePaymentWidget.id)
+                },
+                child: Text("Pay", style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
               ),
             ],

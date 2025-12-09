@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:shopsmart/models/cart_model.dart';
 import 'package:shopsmart/models/product.dart';
 import 'package:shopsmart/providers/ProductProvider.dart';
+import 'package:shopsmart/providers/UserProvider.dart';
 import 'package:shopsmart/providers/cart_provider.dart';
+import 'package:shopsmart/screens/auth/login.dart';
 import 'package:shopsmart/widgets/products/details.dart';
 
 class LatestArrival extends StatelessWidget {
@@ -47,12 +49,17 @@ class LatestArrival extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          if (carts.isProductInCart(
-                            productId: product.productId,
-                          )) {
-                            return;
+
+                          if (UserProvider.email == "") {
+                            Navigator.pushNamed(context, Login.id);
+                          } else{
+                            if (carts.isProductInCart(
+                              productId: product.productId,
+                            )) {
+                              return;
+                            }
+                            carts.addProductToCart(productId: product.productId);
                           }
-                          carts.addProductToCart(productId: product.productId);
                         },
                         icon: Icon(
                           carts.isProductInCart(productId: product.productId)

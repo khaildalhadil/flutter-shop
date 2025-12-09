@@ -11,7 +11,8 @@ class ProfileScrren extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvid = Provider.of<ThemeProvider>(context);
-    final userInfo = Provider.of<UserProvider>(context);
+
+    // UserProvider userInfo = UserProvider();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white10,
@@ -29,7 +30,7 @@ class ProfileScrren extends StatelessWidget {
           children: [
             SizedBox(height: 11),
             Visibility(
-              // visible: false,
+              visible: UserProvider.email != "",
               child: Row(
                 children: [
                   Expanded(
@@ -50,16 +51,13 @@ class ProfileScrren extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Khalid Alhadi",
+                            UserProvider.email == null? "tes": UserProvider.email ,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                             ),
                           ),
-                          Text(
-                            "khalid@gmail.com",
-                            style: TextStyle(fontSize: 14.0),
-                          ),
+
                         ],
                       ),
                     ),
@@ -134,7 +132,7 @@ class ProfileScrren extends StatelessWidget {
             ElevatedButton.icon(
               icon: Icon(Icons.login),
 
-              label: Text(userInfo == null ? "Logout": "Login"),
+              label: Text(UserProvider.email != "" ? "Logout": "Login"),
               onPressed: () async {
                 Alert.showErrorOrWarning(
                   context: context,

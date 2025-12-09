@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
             textColor: Colors.white,
             fontSize: 16.0,
           );
-
+          UserProvider.email = user["email"];
           Navigator.pushNamed(context, RootScreen.id);
 
         } else {

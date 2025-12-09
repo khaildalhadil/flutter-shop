@@ -69,8 +69,7 @@ class _RegisterState extends State<Register> {
           textColor: Colors.white,
           fontSize: 16.0,
         );
-        UserProvider().addUserInfo(_emailController.text, _userNameController.text, _passwordController.text);
-        Navigator.pushNamed(context, RootScreen.id);
+        Navigator.pushNamed(context, Login.id);
       } catch (err) {
         Fluttertoast.showToast(
           msg: err.toString(),

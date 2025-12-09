@@ -10,6 +10,17 @@ class CartProvider with ChangeNotifier {
     return _cartItmes;
   }
 
+
+  // add cart to sqlite
+
+  // Future<void> addToCartSqlite(String productId, int qty) {
+  //   try{
+  //
+  //   }catch(err) {
+  //     print("")
+  //   }
+  // }
+
   void addProductToCart({required String productId}) {
     _cartItmes.putIfAbsent(
       productId,

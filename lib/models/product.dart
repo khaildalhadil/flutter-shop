@@ -20,5 +20,15 @@ class ProductModel with ChangeNotifier {
     required this.productQuantity,
   });
 
-
+  Map<String, dynamic> toMap() {
+    return {
+      "id": productId,
+      "title": productTitle,
+      "price": productPrice,
+      "category": productCategory,
+      "description": productDescription,
+      "image": productImage,
+      "quantity": productQuantity,
+    };
+  }
 }

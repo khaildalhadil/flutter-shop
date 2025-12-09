@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsmart/models/product.dart';
 import 'package:shopsmart/providers/ProductProvider.dart';
+import 'package:shopsmart/providers/UserProvider.dart';
 import 'package:shopsmart/providers/cart_provider.dart';
+import 'package:shopsmart/screens/auth/login.dart';
 import 'package:shopsmart/widgets/products/details.dart';
 
 class ProductWidget extends StatefulWidget {
@@ -57,14 +59,18 @@ class _ProductWidgetState extends State<ProductWidget> {
                         borderRadius: BorderRadius.circular(28.0),
                         child: IconButton(
                           onPressed: () {
-                            if (carts.isProductInCart(
-                              productId: cureentProduct.productId,
-                            )) {
-                              return;
+                            if (UserProvider.email == "") {
+                            Navigator.pushNamed(context, Login.id);
+                            } else {
+                              if (carts.isProductInCart(
+                                productId: cureentProduct.productId,
+                              )) {
+                                return;
+                              }
+                              carts.addProductToCart(
+                                productId: cureentProduct.productId,
+                              );
                             }
-                            carts.addProductToCart(
-                              productId: cureentProduct.productId,
-                            );
                           },
                           icon: Icon(
                             carts.isProductInCart(
